@@ -8,17 +8,20 @@
 
 	<beans:bean id="userDetailsService" class="de.computerlyrik.scs.service.UserDetailsServiceImpl">
 	        <beans:property name="salt" value="${scs.salt}" />
+	        <beans:property name="hash" value="${scs.hash}" />
+	</beans:bean>
+	
+	<beans:bean id="passwordEncoder" class="de.computerlyrik.scs.PasswordEncoderImpl">
+		<beans:property name="salt" value="${scs.salt}" />
+		<beans:property name="hash" value="${scs.hash}" />
 	</beans:bean>
 
 
-
 	<!-- Configure Authentication mechanism -->
-    <authentication-manager alias="authenticationManager">
-    	<!-- SHA-256 values can be produced using 'echo -n your_desired_password | sha256sum' (using normal *nix environments) -->
-    	<authentication-provider user-service-ref="userDetailsService">
-    		    	<password-encoder hash="sha-256">
-    		    	    <salt-source system-wide="${scs.salt}"/>
-    		    	</password-encoder>
+	<authentication-manager alias="authenticationManager">
+	    	<!-- SHA-256 values can be produced using 'echo -n your_desired_password | sha256sum' (using normal *nix environments) -->
+	    	<authentication-provider user-service-ref="userDetailsService">
+			<password-encoder ref="passwordEncoder"/>
 		</authentication-provider>
 	</authentication-manager>
 
