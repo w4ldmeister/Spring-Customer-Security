@@ -6,7 +6,6 @@ import java.security.NoSuchAlgorithmException;
 import javax.persistence.TypedQuery;
 
 import org.apache.log4j.Logger;
-import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UserDetails;
 import de.computerlyrik.scs.UserDetailsSCS;
@@ -18,12 +17,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private static final Logger log = Logger.getLogger(UserDetailsServiceImpl.class);
 
 	private String salt;
+	private String hash;
 	
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException, DataAccessException 
 	{
 		UserDetailsSCS user = UserDetailsSCS.findMyUserByUsername(username);
 		log.debug("Got User "+user);
-
 		/*
 		 * TODO: if username not found:
 		 *       throw new UsernameNotFoundException(username + "not found");
@@ -40,15 +39,25 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		this.salt = salt;
 	}
 	
+	
+	
+	public String getHash() {
+		return hash;
+	}
+
+	public void setHash(String hash) {
+		this.hash = hash;
+	}
+
 	public String calcPassword(String password) throws NoSuchAlgorithmException {
 	
-	    MessageDigest md = MessageDigest.getInstance("SHA-256");
-	    String salt = "mysecretsalt";
-	    byte[] hash = md.digest((password + "{" + salt + "}").getBytes());
-	    StringBuffer sb = new StringBuffer();
-	    for (byte b : hash) {
-	        sb.append(String.format("%02x", b));
-	    }
-	    return sb.toString();
+		log.debug(hash.toUpperCase());
+		MessageDigest md = MessageDigest.getInstance(hash.toUpperCase());
+		byte[] hash = md.digest((password + "{" + salt + "}").getBytes());
+		StringBuffer sb = new StringBuffer();
+		for (byte b : hash) {
+			sb.append(String.format("%02x", b));
+		}
+		return sb.toString();
 	}
 }
