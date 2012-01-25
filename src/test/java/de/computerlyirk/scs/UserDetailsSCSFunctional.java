@@ -18,12 +18,12 @@ import de.computerlyrik.scs.UserDetailsSCS;
 import de.computerlyrik.scs.service.UserDetailsServiceImpl;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:/META-INF" })
+@ContextConfiguration(locations = { "classpath:/META-INF/noSalt/applicationContext.xml" })
 public class UserDetailsSCSFunctional {
 	
 	private static final Logger LOG = Logger.getLogger(UserDetailsSCSFunctional.class);
 
-	
+	@Qualifier("userDetailsService")
     @Autowired 
 	private UserDetailsServiceImpl uds;
     
@@ -48,7 +48,7 @@ public class UserDetailsSCSFunctional {
 	 * Try out some preconfigured password/hash combinations WITH SALT
 	 */
 	@Test
-	public void passwordHashing() {
+	public void saltedPasswordHashing() {
 		uds.setSalt("myTestSalt");
 		Map<String,String> passwordhashes = new HashMap<String,String>();
 		passwordhashes.put("admin", "de6d77d42b352da7c1edd9400529c4602f33220bf19d41759220137ea640e4d1");
