@@ -51,7 +51,7 @@ public class UserDetailsSCS implements UserDetails {
     private boolean enabled = false;
 
 
-    public static de.computerlyrik.scs.UserDetailsSCS findMyUserByUsername(String username) {
+    public static UserDetailsSCS findMyUserByUsername(String username) {
         if (username == null) return null;
         log.info("call findMyUserByUsername");
         TypedQuery<UserDetailsSCS> q = entityManager().createQuery("SELECT o FROM UserDetailsSCS AS o WHERE o.username = :username", UserDetailsSCS.class);
@@ -59,7 +59,7 @@ public class UserDetailsSCS implements UserDetails {
         return entityManager().createQuery("SELECT o FROM UserDetailsSCS o WHERE o.username = '" + username + "'", UserDetailsSCS.class).getSingleResult();
     }
     
-    public List<org.springframework.security.core.GrantedAuthority> getAuthorities() {
+    public List<GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> glist = new ArrayList<GrantedAuthority>();
         log.info("call getAuthorities");
         String roleString = "ROLE_" + this.getClass().getSimpleName().toUpperCase();

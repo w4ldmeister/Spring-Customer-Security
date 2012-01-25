@@ -6,6 +6,7 @@ import java.security.NoSuchAlgorithmException;
 import javax.persistence.TypedQuery;
 
 import org.apache.log4j.Logger;
+import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UserDetails;
 import de.computerlyrik.scs.UserDetailsSCS;
@@ -20,14 +21,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException, DataAccessException 
 	{
-		//TypedQuery<UserDetailsSCS> q = 
-		//	UserDetailsSCS.findUserDetailsSCSsByUsernameEquals(username);
-		//UserDetailsSCS user = q.getSingleResult();
 		UserDetailsSCS user = UserDetailsSCS.findMyUserByUsername(username);
-		log.info("Got User "+user);
+		log.debug("Got User "+user);
 
 		/*
-		 * if username not found:
+		 * TODO: if username not found:
 		 *       throw new UsernameNotFoundException(username + "not found");
 
 		 */
