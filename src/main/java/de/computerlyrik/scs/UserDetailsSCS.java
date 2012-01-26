@@ -20,6 +20,7 @@ import org.springframework.security.core.authority.GrantedAuthorityImpl;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import de.computerlyrik.scs.service.UserDetailsServiceImpl;
+import org.springframework.security.authentication.encoding.PasswordEncoder;
 
 @RooJavaBean
 @RooToString
@@ -34,6 +35,11 @@ public class UserDetailsSCS implements UserDetails {
 	@Qualifier("userDetailsService")
 	@Transient
 	private UserDetailsServiceImpl uds;
+    
+    @Autowired 
+	@Qualifier("passwordEncoder")
+	@Transient
+	private PasswordEncoder pe;  
     
 	@NotNull
     @Column(unique = true)
@@ -61,22 +67,22 @@ public class UserDetailsSCS implements UserDetails {
     
     public List<GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> glist = new ArrayList<GrantedAuthority>();
-        log.info("call getAuthorities");
+        log.debug("call getAuthorities");
         String roleString = "ROLE_" + this.getClass().getSimpleName().toUpperCase();
-        log.info("Adding " + roleString + " for User " + this.getUsername());
+        log.debug("Adding " + roleString + " for User " + this.getUsername());
         glist.add(new GrantedAuthorityImpl(roleString));
         return glist;
     }
 
     public void setPassword(String password)  {
     	try {
-    		this.password = uds.calcPassword(password);
+    		this.password = pe.encodePassword(password, null);
     	}
     	catch(Exception e) {
     		log.error("Failed setting password of "+this.username);
     		log.info("Login of "+this.username+" disabled");
     		this.password = "";
     	}
-        log.info("Password of user " + username + " set to " + this.getPassword() +" (hash)");
+        log.debug("Password of user " + username + " set to " + this.getPassword() +" (hash)");
     }
 }

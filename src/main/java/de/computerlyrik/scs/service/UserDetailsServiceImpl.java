@@ -39,25 +39,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		this.salt = salt;
 	}
 	
-	
-	
 	public String getHash() {
 		return hash;
 	}
 
 	public void setHash(String hash) {
 		this.hash = hash;
-	}
-
-	public String calcPassword(String password) throws NoSuchAlgorithmException {
-	
-		log.debug(hash.toUpperCase());
-		MessageDigest md = MessageDigest.getInstance(hash.toUpperCase());
-		byte[] hash = md.digest((password + "{" + salt + "}").getBytes());
-		StringBuffer sb = new StringBuffer();
-		for (byte b : hash) {
-			sb.append(String.format("%02x", b));
-		}
-		return sb.toString();
 	}
 }
