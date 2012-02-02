@@ -24,6 +24,7 @@ import de.computerlyrik.scs.service.UserDetailsServiceImpl;
 import de.computerlyrik.scs.exception.EncodingException;
 import org.springframework.security.authentication.encoding.PasswordEncoder;
 
+@RooJavaBean
 public class PasswordEncoderImpl implements PasswordEncoder {
 
 	private static final Logger log = Logger.getLogger(PasswordEncoderImpl.class);
