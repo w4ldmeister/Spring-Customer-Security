@@ -51,14 +51,6 @@ public class UserDetailsSCS implements UserDetails {
     private boolean enabled = false;
 
 
-    public static UserDetailsSCS findMyUserByUsername(String username) {
-        if (username == null) return null;
-        log.info("call findMyUserByUsername");
-        TypedQuery<UserDetailsSCS> q = entityManager().createQuery("SELECT o FROM UserDetailsSCS AS o WHERE o.username = :username", UserDetailsSCS.class);
-
-        return entityManager().createQuery("SELECT o FROM UserDetailsSCS o WHERE o.username = '" + username + "'", UserDetailsSCS.class).getSingleResult();
-    }
-    
     public List<GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> glist = new ArrayList<GrantedAuthority>();
         log.info("call getAuthorities");
