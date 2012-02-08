@@ -21,7 +21,17 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException, DataAccessException 
 	{
-		UserDetailsSCS user = UserDetailsSCS.findMyUserByUsername(username);
+		UserDetailsSCS user;
+		try {
+			TypedQuery<UserDetailsSCS> q = UserDetailsSCS.findUserDetailsSCSsByUsernameEquals(username);
+			if (q.getMaxResults() == 0) {
+				throw new UsernameNotFoundException("Username "+ username + "not found");
+			}
+			user = q.getSingleResult();
+		}
+		catch (IllegalArgumentException e) {
+			throw new DataAccessException("Error loading User "+username,e);
+		}
 		log.debug("Got User "+user);
 
 		/*
