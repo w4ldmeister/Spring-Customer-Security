@@ -59,7 +59,7 @@ public class UserDetailsSCS implements UserDetails {
 
     public List<GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> glist = new ArrayList<GrantedAuthority>();
-        log.debug("call getAuthorities");
+        log.trace("call getAuthorities");
         String roleString = "ROLE_" + this.getClass().getSimpleName().toUpperCase();
         log.debug("Adding " + roleString + " for User " + this.getUsername());
         glist.add(new GrantedAuthorityImpl(roleString));
