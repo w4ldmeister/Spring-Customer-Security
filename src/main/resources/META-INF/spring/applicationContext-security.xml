@@ -10,8 +10,6 @@
 	</beans:bean>
 	
 	<beans:bean id="passwordEncoder" class="de.computerlyrik.scs.service.PasswordEncoderImpl">
-		<beans:property name="salt" value="${scs.salt}" />
-		<beans:property name="hash" value="${scs.hash}" />
 	</beans:bean>
 
 
