@@ -7,8 +7,8 @@
     <version>0.9</version>
     <name>SpringCustomerSecurity</name>
     <properties>
-        <roo.version>1.2.0.RELEASE</roo.version>
-        <spring.version>3.0.6.RELEASE</spring.version>
+        <roo.version>1.2.1.RELEASE</roo.version>
+        <spring.version>3.1.0.RELEASE</spring.version>
         <aspectj.version>1.6.11</aspectj.version>
         <slf4j.version>1.6.1</slf4j.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -212,8 +212,7 @@
         <dependency>
             <groupId>cglib</groupId>
             <artifactId>cglib-nodep</artifactId>
-            <version>2.2</version>
-            <classifier/>
+            <version>2.2.2</version>
         </dependency>
         <dependency>
             <groupId>javax.transaction</groupId>
@@ -242,14 +241,7 @@
         <dependency>
             <groupId>commons-pool</groupId>
             <artifactId>commons-pool</artifactId>
-            <version>1.5.4</version>
-            <classifier/>
-            <exclusions>
-                <exclusion>
-                    <groupId>commons-logging</groupId>
-                    <artifactId>commons-logging</artifactId>
-                </exclusion>
-            </exclusions>
+            <version>1.5.6</version>
         </dependency>
         <dependency>
             <groupId>commons-dbcp</groupId>
