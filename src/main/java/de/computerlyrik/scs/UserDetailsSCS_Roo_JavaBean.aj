@@ -5,6 +5,7 @@ package de.computerlyrik.scs;
 
 import de.computerlyrik.scs.UserDetailsSCS;
 import de.computerlyrik.scs.service.UserDetailsServiceImpl;
+import org.springframework.security.authentication.encoding.PasswordEncoder;
 
 privileged aspect UserDetailsSCS_Roo_JavaBean {
     
@@ -14,6 +15,14 @@ privileged aspect UserDetailsSCS_Roo_JavaBean {
     
     public void UserDetailsSCS.setUds(UserDetailsServiceImpl uds) {
         this.uds = uds;
+    }
+    
+    public PasswordEncoder UserDetailsSCS.getPe() {
+        return this.pe;
+    }
+    
+    public void UserDetailsSCS.setPe(PasswordEncoder pe) {
+        this.pe = pe;
     }
     
     public String UserDetailsSCS.getUsername() {

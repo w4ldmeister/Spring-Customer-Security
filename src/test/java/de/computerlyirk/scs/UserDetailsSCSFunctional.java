@@ -1,20 +1,19 @@
 package de.computerlyirk.scs;
 
-import java.util.Map;
 import java.util.HashMap;
-import javax.persistence.Transient;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.roo.addon.dod.RooDataOnDemand;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import de.computerlyrik.scs.UserDetailsSCS;
+import de.computerlyrik.scs.service.PasswordEncoderImpl;
 import de.computerlyrik.scs.service.UserDetailsServiceImpl;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -26,6 +25,10 @@ public class UserDetailsSCSFunctional {
 	@Qualifier("userDetailsService")
     @Autowired 
 	private UserDetailsServiceImpl uds;
+	
+    @Autowired 
+	@Qualifier("passwordEncoder")
+	private PasswordEncoderImpl pe;  
     
 	/**
 	 * Try out some preconfigured password/hash combinations
@@ -49,7 +52,7 @@ public class UserDetailsSCSFunctional {
 	 */
 	@Test
 	public void saltedPasswordHashing() {
-		uds.setSalt("myTestSalt");
+		pe.setSalt("myTestSalt");
 		Map<String,String> passwordhashes = new HashMap<String,String>();
 		passwordhashes.put("admin", "de6d77d42b352da7c1edd9400529c4602f33220bf19d41759220137ea640e4d1");
 		UserDetailsSCS u = new UserDetailsSCS();
