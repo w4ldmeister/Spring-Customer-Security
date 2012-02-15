@@ -40,9 +40,9 @@ public class PasswordEncoderImpl implements PasswordEncoder {
 			throws DataAccessException  {
 		log.debug(hash.toUpperCase());
 		try {
-			MessageDigest md = MessageDigest.getInstance(hash.toUpperCase());
+			MessageDigest md = MessageDigest.getInstance((hash==null?"sha-256":hash).toUpperCase());
 			byte[] hash = md.digest((rawPass
-					+ "{" + salt + "}").getBytes());
+					+((salt==null)?"":"{" + salt + "}")).getBytes());
 			StringBuffer sb = new StringBuffer();
 			for (byte b : hash) {
 				sb.append(String.format("%02x", b));
