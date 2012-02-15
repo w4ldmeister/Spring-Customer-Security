@@ -30,12 +30,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		catch (IllegalArgumentException e) {
 			throw new RecoverableDataAccessException("Error loading User "+username,e);
 		}
-		log.debug("Got User "+user);
-		/*
-		 * TODO: if username not found:
-		 *       throw new UsernameNotFoundException(username + "not found");
-
-		 */
+		log.debug("Loaded "+user.getUsername());
+		log.trace(user);
 		return (UserDetails) user;
 	}
 }
