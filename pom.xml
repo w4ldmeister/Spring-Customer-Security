@@ -4,7 +4,7 @@
     <groupId>de.computerlyrik.scs</groupId>
     <artifactId>SpringCustomerSecurity</artifactId>
     <packaging>jar</packaging>
-    <version>0.9.2</version>
+    <version>0.9.5</version>
     <name>SpringCustomerSecurity</name>
     <properties>
         <roo.version>1.2.1.RELEASE</roo.version>
