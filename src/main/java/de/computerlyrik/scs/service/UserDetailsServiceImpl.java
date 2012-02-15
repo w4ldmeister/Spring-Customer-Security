@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UserDetails;
 import de.computerlyrik.scs.UserDetailsSCS;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.RecoverableDataAccessException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -30,7 +31,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 			user = q.getSingleResult();
 		}
 		catch (IllegalArgumentException e) {
-			throw new DataAccessException("Error loading User "+username,e);
+			throw new RecoverableDataAccessException("Error loading User "+username,e);
 		}
 		log.debug("Got User "+user);
 
