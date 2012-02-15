@@ -59,7 +59,7 @@ public class UserDetailsSCS implements UserDetails {
 
     public static UserDetailsSCS findMyUserByUsername(String username) {
         if (username == null) return null;
-        log.info("call findMyUserByUsername");
+        log.debug("call findMyUserByUsername");
         TypedQuery<UserDetailsSCS> q = entityManager().createQuery("SELECT o FROM UserDetailsSCS AS o WHERE o.username = :username", UserDetailsSCS.class);
 
         return entityManager().createQuery("SELECT o FROM UserDetailsSCS o WHERE o.username = '" + username + "'", UserDetailsSCS.class).getSingleResult();
