@@ -12,7 +12,7 @@
         <aspectj.version>1.6.11</aspectj.version>
         <slf4j.version>1.6.1</slf4j.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	<altDeploymentRepository>release-repo::default::file:Maven-Repository/releases</altDeploymentRepository>
+	<altDeploymentRepository>release-repo::default::file:repo/releases</altDeploymentRepository>
     <spring-security.version>3.0.6.RELEASE</spring-security.version>
     </properties>
     <repositories>
