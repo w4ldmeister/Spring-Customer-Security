@@ -17,10 +17,10 @@ import de.computerlyrik.scs.service.PasswordEncoderImpl;
 import de.computerlyrik.scs.service.UserDetailsServiceImpl;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:/META-INF/noSalt/applicationContext.xml" })
-public class UserDetailsSCSFunctional {
+@ContextConfiguration(locations = { "classpath:/META-INF/Default/applicationContext.xml" })
+public class UserDetailsSCSTest {
 	
-	private static final Logger LOG = Logger.getLogger(UserDetailsSCSFunctional.class);
+	private static final Logger LOG = Logger.getLogger(UserDetailsSCSTest.class);
 
 	@Qualifier("userDetailsService")
     @Autowired 
@@ -46,23 +46,4 @@ public class UserDetailsSCSFunctional {
 						.equals(passwordhashes.get(password)));
 		}
 	}	
-
-	/**
-	 * Try out some preconfigured password/hash combinations WITH SALT
-	 */
-	@Test
-	public void saltedPasswordHashing() {
-		pe.setSalt("myTestSalt");
-		Map<String,String> passwordhashes = new HashMap<String,String>();
-		passwordhashes.put("admin", "de6d77d42b352da7c1edd9400529c4602f33220bf19d41759220137ea640e4d1");
-		UserDetailsSCS u = new UserDetailsSCS();
-		for(String password : passwordhashes.keySet()) {
-			u.setPassword(password);
-			Assert.assertTrue(
-					"Password hashes should be equal!", 
-					u.getPassword()
-						.equals(passwordhashes.get(password)));
-		}
-	}	
-
 }

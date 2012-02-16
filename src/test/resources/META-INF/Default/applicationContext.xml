@@ -17,7 +17,12 @@
 
     <context:spring-configured/>
 
+    <context:property-placeholder location="classpath*:META-INF/*.properties"/>
 
+    <context:component-scan base-package="de.computerlyrik.wdcmapp">
+        <context:exclude-filter expression=".*_Roo_.*" type="regex"/>
+        <context:exclude-filter expression="org.springframework.stereotype.Controller" type="annotation"/>
+    </context:component-scan>
     <bean class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close" id="dataSource">
         <property name="driverClassName" value="${database.driverClassName}"/>
         <property name="url" value="${database.url}"/>
@@ -38,21 +43,18 @@
         <property name="persistenceUnitName" value="persistenceUnit"/>
         <property name="dataSource" ref="dataSource"/>
     </bean>
-
-
+    
 	<bean id="userDetailsService" class="de.computerlyrik.scs.service.UserDetailsServiceImpl">
 	</bean>
 	
 	<bean id="passwordEncoder" class="de.computerlyrik.scs.service.PasswordEncoderImpl">
-		<property name="hash" value="sha-256" />
 	</bean>
 	
 	<!-- Configure Authentication mechanism -->
     <security:authentication-manager alias="authenticationManager">
     	<!-- SHA-256 values can be produced using 'echo -n your_desired_password | sha256sum' (using normal *nix environments) -->
     	<security:authentication-provider user-service-ref="userDetailsService">
-    		    	<security:password-encoder hash="sha-256"/>
+			<security:password-encoder ref="passwordEncoder"/>
 		</security:authentication-provider>
 	</security:authentication-manager>
-
 </beans>
