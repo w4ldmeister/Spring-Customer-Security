@@ -48,8 +48,16 @@
 	</bean>
 	
 	<bean id="passwordEncoder" class="de.computerlyrik.scs.service.PasswordEncoderImpl">
-	</bean>
+	</bean>	
 	
+	<bean id="hashingPasswordEncoder" class="de.computerlyrik.scs.service.PasswordEncoderImpl">
+		<property name="hash" value="${scs.hash}" />
+	</bean>	
+	<bean id="saltedPasswordEncoder" class="de.computerlyrik.scs.service.PasswordEncoderImpl">
+		<property name="hash" value="${scs.hash}" />
+		<property name="salt" value="${scs.salt}" />
+	</bean>
+
 	<!-- Configure Authentication mechanism -->
     <security:authentication-manager alias="authenticationManager">
     	<!-- SHA-256 values can be produced using 'echo -n your_desired_password | sha256sum' (using normal *nix environments) -->
