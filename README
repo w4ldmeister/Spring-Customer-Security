@@ -37,3 +37,22 @@ scs.salt=mycoolsaltvalue
     </filter-mapping>
 
 now you should start your webapp and login with username and password "admin" (without "")!
+
+
+#Step2
+
+in your Pom.xml add
+
+        <repository>
+            <id>computerlyrik-scs-releases</id>
+            <url>https://github.com/w4ldmeister/Spring-Customer-Security/raw/master/repo/releases</url>
+
+         </repository>
+
+
+        <dependency>
+            <groupId>de.computerlyrik.scs</groupId>
+            <artifactId>SpringCustomerSecurity</artifactId>
+            <version>0.9.9</version>
+        </dependency>
+
