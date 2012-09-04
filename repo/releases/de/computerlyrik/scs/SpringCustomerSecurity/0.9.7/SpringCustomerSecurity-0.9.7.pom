@@ -4,7 +4,7 @@
     <groupId>de.computerlyrik.scs</groupId>
     <artifactId>SpringCustomerSecurity</artifactId>
     <packaging>jar</packaging>
-    <version>0.9.9</version>
+    <version>0.9.7</version>
     <name>SpringCustomerSecurity</name>
     <properties>
         <roo.version>1.2.1.RELEASE</roo.version>
@@ -12,7 +12,7 @@
         <aspectj.version>1.6.11</aspectj.version>
         <slf4j.version>1.6.1</slf4j.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	<altDeploymentRepository>release-repo::default::file:repo/releases</altDeploymentRepository>
+	<altDeploymentRepository>release-repo::default::file:Maven-Repository/releases</altDeploymentRepository>
     <spring-security.version>3.0.6.RELEASE</spring-security.version>
     </properties>
     <repositories>

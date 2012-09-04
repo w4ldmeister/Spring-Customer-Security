@@ -17,10 +17,10 @@ import de.computerlyrik.scs.service.PasswordEncoderImpl;
 import de.computerlyrik.scs.service.UserDetailsServiceImpl;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:/META-INF/noSalt/applicationContext.xml" })
-public class UserDetailsSCSFunctional {
+@ContextConfiguration(locations = { "classpath:/META-INF/Default/applicationContext.xml" })
+public class UserDetailsSCSTest {
 	
-	private static final Logger LOG = Logger.getLogger(UserDetailsSCSFunctional.class);
+	private static final Logger LOG = Logger.getLogger(UserDetailsSCSTest.class);
 
 	@Qualifier("userDetailsService")
     @Autowired 
@@ -30,11 +30,18 @@ public class UserDetailsSCSFunctional {
 	@Qualifier("passwordEncoder")
 	private PasswordEncoderImpl pe;  
     
-	/**
+    @Autowired 
+	@Qualifier("hashingPasswordEncoder")
+	private PasswordEncoderImpl pe2;     
+	
+    @Autowired 
+	@Qualifier("saltedPasswordEncoder")
+	private PasswordEncoderImpl pe3; 
+    /**
 	 * Try out some preconfigured password/hash combinations
 	 */
 	@Test
-	public void passwordHashing() {
+	public void userDetailsSCSDefaultTest() {
 		Map<String,String> passwordhashes = new HashMap<String,String>();
 		passwordhashes.put("admin", "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918");		
 		UserDetailsSCS u = new UserDetailsSCS();
@@ -46,23 +53,26 @@ public class UserDetailsSCSFunctional {
 						.equals(passwordhashes.get(password)));
 		}
 	}	
-
-	/**
-	 * Try out some preconfigured password/hash combinations WITH SALT
-	 */
+	
 	@Test
-	public void saltedPasswordHashing() {
-		pe.setSalt("myTestSalt");
+	public void customHashingPasswordGeneration() {
 		Map<String,String> passwordhashes = new HashMap<String,String>();
-		passwordhashes.put("admin", "de6d77d42b352da7c1edd9400529c4602f33220bf19d41759220137ea640e4d1");
-		UserDetailsSCS u = new UserDetailsSCS();
-		for(String password : passwordhashes.keySet()) {
-			u.setPassword(password);
+		passwordhashes.put("admin", "d033e22ae348aeb5660fc2140aec35850c4da997");		
+		for(String password : passwordhashes.keySet()) {			
 			Assert.assertTrue(
-					"Password hashes should be equal!", 
-					u.getPassword()
+					pe2.encodePassword(password,null)
+						.equals(passwordhashes.get(password)));
+		}
+	}
+	
+	@Test
+	public void customHashingSaltedPasswordGeneration() {
+		Map<String,String> passwordhashes = new HashMap<String,String>();
+		passwordhashes.put("admin", "f7011b38f770ec641e7629efe56c2dd1d181c70e");		
+		for(String password : passwordhashes.keySet()) {			
+			Assert.assertTrue(
+					pe3.encodePassword(password,null)
 						.equals(passwordhashes.get(password)));
 		}
 	}	
-
 }

@@ -38,11 +38,12 @@ public class PasswordEncoderImpl implements PasswordEncoder {
 	@Override
 	public String encodePassword(String rawPass, Object nothing)
 			throws DataAccessException  {
-		log.debug(hash.toUpperCase());
+		log.trace("using hash value "+hash);
+		log.trace("using salt value "+salt);
 		try {
-			MessageDigest md = MessageDigest.getInstance(hash.toUpperCase());
+			MessageDigest md = MessageDigest.getInstance((hash==null?"sha-256":hash).toUpperCase());
 			byte[] hash = md.digest((rawPass
-					+ "{" + salt + "}").getBytes());
+					+((salt==null)?"":"{" + salt + "}")).getBytes());
 			StringBuffer sb = new StringBuffer();
 			for (byte b : hash) {
 				sb.append(String.format("%02x", b));
