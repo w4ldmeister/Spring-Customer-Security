@@ -23,7 +23,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import de.computerlyrik.scs.service.UserDetailsServiceImpl;
 import de.computerlyrik.scs.exception.EncodingException;
 import org.springframework.security.authentication.encoding.PasswordEncoder;
+import org.springframework.roo.addon.serializable.RooSerializable;
 
+@RooSerializable
 @RooJavaBean
 public class PasswordEncoderImpl implements PasswordEncoder {
 
