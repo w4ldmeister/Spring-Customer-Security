@@ -7,7 +7,6 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Transient;
 import javax.persistence.TypedQuery;
-import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotNull;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +22,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import de.computerlyrik.scs.service.UserDetailsServiceImpl;
 import org.springframework.security.authentication.encoding.PasswordEncoder;
 
-@MappedSuperclass
 @RooJavaBean
 @RooToString
-@RooJpaActiveRecord(finders = { "findUserDetailsSCSsByUsernameEquals" })
+@RooJpaActiveRecord(finders = { "findUserDetailsSCSsByUsernameEquals" }, mappedSuperclass = true)
 public class UserDetailsSCS implements UserDetails {
 
     private static final long serialVersionUID = 1L;

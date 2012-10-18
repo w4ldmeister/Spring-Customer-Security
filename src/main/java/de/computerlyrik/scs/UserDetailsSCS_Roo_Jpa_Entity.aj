@@ -5,15 +5,15 @@ package de.computerlyrik.scs;
 
 import de.computerlyrik.scs.UserDetailsSCS;
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.Version;
 
 privileged aspect UserDetailsSCS_Roo_Jpa_Entity {
     
-    declare @type: UserDetailsSCS: @Entity;
+    declare @type: UserDetailsSCS: @MappedSuperclass;
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
