@@ -13,6 +13,9 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.dao.RecoverableDataAccessException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+import org.springframework.roo.addon.serializable.RooSerializable;
+
+@RooSerializable
 public class UserDetailsServiceImpl implements UserDetailsService {
 	
     private static final Logger log = Logger.getLogger(UserDetailsServiceImpl.class);
