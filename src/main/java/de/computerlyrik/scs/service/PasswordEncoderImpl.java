@@ -35,7 +35,6 @@ public class PasswordEncoderImpl implements PasswordEncoder {
 	/**
 	 * Throws salt away, because it is configured externally
 	 */
-	@Override
 	public String encodePassword(String rawPass, Object nothing)
 			throws DataAccessException  {
 		log.trace("using hash value "+hash);
@@ -58,7 +57,6 @@ public class PasswordEncoderImpl implements PasswordEncoder {
 	/**
 	 * Throw salt away - again
 	 */
-	@Override
 	public boolean isPasswordValid(String encPass, String rawPass, Object nothing)
 			throws DataAccessException {
 		return encodePassword(rawPass,null).equals(encPass);
